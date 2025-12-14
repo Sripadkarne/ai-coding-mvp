@@ -112,10 +112,13 @@ This will:
 
 - Lock exact package versions via uv.lock
 
+### Start the API Server
 From the repository root:
 ```
 uv run task run-local
 ```
+
+### Run the Test Server
 Run the test script In a separate terminal:
 ```
 uv run task test-api
