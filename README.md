@@ -92,9 +92,9 @@ This design keeps ingestion simple and allows notes to be handled independently.
 - ### OpenAI API key
 
    - Set the API key in your environment:
-    ```
-    export OPENAI_API_KEY="your_api_key_here"
-    ` ``
+       ```
+       export OPENAI_API_KEY="your_api_key_here"
+       ```
 ## Start the API server
 
 From the repository root:
