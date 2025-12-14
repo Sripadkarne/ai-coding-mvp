@@ -1,6 +1,5 @@
-# ai-coding-mvp
 
-## Earnest RCM – AI Coding Task
+# Earnest RCM – AI Coding Task
 
 This repository contains my implementation of the Earnest RCM Independent Coding Task. The project implements a small Django-based API for ingesting medical charts, storing structured clinical notes, and assigning ICD-10 Category G (nervous system) codes using a vector similarity approach with LangChain and Chroma.
 
@@ -81,11 +80,9 @@ This design keeps ingestion simple and allows notes to be handled independently.
 4. Returns one ICD-10 code and similarity score per note
 
 ## Vector Store & Coding Implemented using LangChain + Chroma
-ICD-10 G-code long descriptions are embedded using OpenAI’s text-embedding-3-large
-
-The Chroma vector store is persisted locally to avoid rebuilding embeddings on each run
-
-Coding uses a retrieval-only approach, as specified in the task
+- ICD-10 G-code long descriptions are embedded using OpenAI’s text-embedding-3-large
+- The Chroma vector store is persisted locally to avoid rebuilding embeddings on each run
+- Coding uses a retrieval-only approach, as specified in the task
 
 # Running the Application
 ## Requirements
@@ -113,10 +110,7 @@ The test script calls all API endpoints in sequence and prints their outputs.
 
 ## Notes
 
-The upload endpoint is idempotent, so notes_inserted may be 0 on repeat runs
+- The upload endpoint is idempotent, so notes_inserted may be 0 on repeat runs
 
-Some low-signal sections (e.g., vitals or metadata) may produce weaker semantic matches, which is expected for a pure vector similarity approach
+- Some low-signal sections (e.g., vitals or metadata) may produce weaker semantic matches, which is expected for a pure vector similarity approach
 
-## Summary
-
-This implementation demonstrates a clean, end-to-end pipeline for medical chart ingestion, storage, and retrieval-based ICD coding using modern Python tooling. The codebase is intentionally simple, modular, and easy to reason about.
