@@ -12,7 +12,6 @@ COLLECTION_NAME = "icd10_g_codes"
 
 _vectorstore: Optional[Chroma] = None
 
-
 def _build_vectorstore() -> Chroma:
     """
     Build a Chroma vector store from data/g_codes.csv and persist it locally.
@@ -59,14 +58,16 @@ def _build_vectorstore() -> Chroma:
 
     # Add all documents and persist
     vs.add_documents(docs)
-    # Chroma persists automatically via persist_directory, but calling persist is fine.
-    #vs.persist()
     return vs
 
 
 def get_vectorstore() -> Chroma:
     """
-    Get a cached vector store; build it if it doesn't exist yet.
+    Load or lazily initialize the persisted Chroma vector store
+    containing ICD-10 G-code embeddings.
+
+    :return: Initialized Chroma vector store.
+    :rtype: Chroma
     """
     global _vectorstore
     if _vectorstore is None:

@@ -11,8 +11,8 @@ from django.apps import apps
 
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-
 import json
+
 #### #! DO NOT MODIFY THIS CODE #! ####
 
 class TestView(APIView):
@@ -119,7 +119,6 @@ def list_charts(request):
     from app.models import MedicalNote
 
     notes = MedicalNote.objects.all()
-
     data = [note.to_dict() for note in notes]
 
     return JsonResponse(data, safe=False)
@@ -170,7 +169,7 @@ def code_chart(request):
 
         doc, score = matches[0]
         # Score semantics vary; keep raw score to be honest.
-        # Provide a simple normalized similarity too (safe, monotonic).
+        # Provide a simple normalized similarity too
         normalized_similarity = None
         try:
             normalized_similarity = 1.0 / (1.0 + float(score))
@@ -186,7 +185,5 @@ def code_chart(request):
             "score": score,  # raw from Chroma/LangChain
             "normalized_similarity": normalized_similarity,
         })
-
     return JsonResponse({"chart_id": chart_id, "results": results})
 
-# Create your views here.

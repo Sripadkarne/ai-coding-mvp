@@ -14,7 +14,7 @@ urlpatterns = [
 
     path("charts/", list_charts),
 
-    path("code-chart/", code_chart),
+    path("code-chart/", code_chart)
 
     # Create your urls here.
 ]

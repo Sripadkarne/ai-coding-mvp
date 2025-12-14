@@ -20,17 +20,16 @@ def test_api() -> dict:
 # Build your script here.
 
 def get_chart_schema() -> dict:
-
-    response = requests.get(f"{API_BASE_URL}/app/chart-schema/")
-    return response.json()
     """
     Get the chart schema from the API.
-
-
 
     :return: The API response.
     :rtype: dict
     """
+
+    response = requests.get(f"{API_BASE_URL}/app/chart-schema/")
+    return response.json()
+
     pass
 
 import json
@@ -110,19 +109,17 @@ def upload_chart() -> dict:
     return response.json()
 
 def list_charts() -> dict:
-
-    response = requests.get(
-        f"{API_BASE_URL}/app/charts/"
-    )
-
-    return response.json()
-
     """
     List all the charts in the API.
 
     :return: The API response.
     :rtype: dict
     """
+    response = requests.get(
+        f"{API_BASE_URL}/app/charts/"
+    )
+
+    return response.json()
 
 def code_chart() -> dict:
     """
