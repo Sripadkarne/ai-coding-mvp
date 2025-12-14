@@ -20,22 +20,80 @@ def test_api() -> dict:
 # Build your script here.
 
 def get_chart_schema() -> dict:
+
+    response = requests.get(f"{API_BASE_URL}/app/chart-schema/")
+    return response.json()
     """
     Get the chart schema from the API.
+
+
 
     :return: The API response.
     :rtype: dict
     """
     pass
 
+import json
 def transform_chart_to_json() -> dict:
     """
-    Transform a chart to a JSON object.
+    Transform the raw medical chart text file into a structured JSON object.
 
-    :return: The JSON object of the chart.
+    :return: The JSON object of the transformed chart.
     :rtype: dict
     """
-    pass
+    chart_path = "data/medical_chart.txt"
+
+    with open(chart_path, "r") as f:
+        lines = [line.rstrip() for line in f]
+
+    notes = []
+    current_note_type = None
+    current_note_id = None
+    current_content_lines = []
+
+    for line in lines:
+        # Detect note headers (ALL CAPS, no colon)
+        if line.isupper() and line.strip():
+            # Save previous note if it exists
+            if current_note_id:
+                notes.append({
+                    "note_type": current_note_type,
+                    "note_id": current_note_id,
+                    "content": " ".join(current_content_lines).strip()
+                })
+                current_content_lines = []
+
+            current_note_type = line
+            current_note_id = None
+
+        # Detect note ID line
+        elif line.startswith("Note ID:"):
+            current_note_id = line.replace("Note ID:", "").strip()
+
+        # Accumulate content
+        elif current_note_id:
+            if line.strip():  # ignore empty lines
+                current_content_lines.append(line.strip())
+
+    # Append last note
+    if current_note_id:
+        notes.append({
+            "note_type": current_note_type,
+            "note_id": current_note_id,
+            "content": " ".join(current_content_lines).strip()
+        })
+
+    # Extract chart_id from any note_id (e.g., note-hpi-case12 → case12)
+    chart_id = notes[0]["note_id"].split("-")[-1] if notes else "unknown"
+
+    # Add chart_id to each note
+    for note in notes:
+        note["chart_id"] = chart_id
+
+    return {
+        "chart_id": chart_id,
+        "notes": notes
+    }
 
 def upload_chart() -> dict:
     """
@@ -44,16 +102,27 @@ def upload_chart() -> dict:
     :return: The API response.
     :rtype: dict
     """
-    pass
+    chart_json = transform_chart_to_json()
+    response = requests.post(
+        f"{API_BASE_URL}/app/upload-chart/",
+        json=chart_json
+    )
+    return response.json()
 
 def list_charts() -> dict:
+
+    response = requests.get(
+        f"{API_BASE_URL}/app/charts/"
+    )
+
+    return response.json()
+
     """
     List all the charts in the API.
 
     :return: The API response.
     :rtype: dict
     """
-    pass
 
 def code_chart() -> dict:
     """
@@ -62,7 +131,12 @@ def code_chart() -> dict:
     :return: The API response.
     :rtype: dict
     """
-    pass
+    chart_json = transform_chart_to_json()
+    response = requests.post(
+        f"{API_BASE_URL}/app/code-chart/",
+        json={"chart_id": chart_json["chart_id"]}
+    )
+    return response.json()
 
 
 #### #! DO NOT MODIFY THIS CODE #! ####

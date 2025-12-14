@@ -20,3 +20,4 @@ tasks:
       python scripts/test_api_script.py > outputs/output_${timestamp}.txt
       pkill -f "manage.py runserver" || true
     silent: true
+
