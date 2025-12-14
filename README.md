@@ -1,6 +1,6 @@
 # ai-coding-mvp
 
-##Earnest RCM – AI Coding Task
+##Earnest RCM – AI Coding Task##
 
 This repository contains my implementation of the Earnest RCM Independent Coding Task. The project implements a small Django-based API for ingesting medical charts, storing structured clinical notes, and assigning ICD-10 Category G (nervous system) codes using a vector similarity approach with LangChain and Chroma.
 
