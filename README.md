@@ -3,7 +3,6 @@
 
 This repository contains my implementation of the Earnest RCM Independent Coding Task. The project implements a small Django-based API for ingesting medical charts, storing structured clinical notes, and assigning ICD-10 Category G (nervous system) codes using a vector similarity approach with LangChain and Chroma.
 
-The focus of this implementation is clean API design, data modeling, and a practical retrieval-based coding pipeline.
 
 ### Overview
 
