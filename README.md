@@ -79,7 +79,8 @@ This design keeps ingestion simple and allows notes to be handled independently.
 2. Queries a persisted Chroma vector store
 3. Uses k = 1 similarity search per note
 4. Returns one ICD-10 code and similarity score per note
-5. Vector Store & Coding Implemented using LangChain + Chroma
+
+## Vector Store & Coding Implemented using LangChain + Chroma
 ICD-10 G-code long descriptions are embedded using OpenAI’s text-embedding-3-large
 
 The Chroma vector store is persisted locally to avoid rebuilding embeddings on each run
@@ -89,23 +90,21 @@ Coding uses a retrieval-only approach, as specified in the task
 Running the Application
 ## Requirements
 
-Python 3.11+
+## Python 3.11+
 
-OpenAI API key
+## OpenAI API key
 
-Set the API key in your environment:
-```
-export OPENAI_API_KEY="your_api_key_here"
-```
+- Set the API key in your environment:
+  ```
+  export OPENAI_API_KEY="your_api_key_here"
+  ```
 ## Start the API server
 
 From the repository root:
 ```
 uv run task run-local
 ```
-Run the test script
-
-In a separate terminal:
+Run the test script In a separate terminal:
 ```
 uv run task test-api
 ```
