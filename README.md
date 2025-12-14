@@ -95,6 +95,22 @@ This design keeps ingestion simple and allows notes to be handled independently.
        export OPENAI_API_KEY="your_api_key_here"
        ```
 ## Start the API server
+### Environment Setup
+
+This project uses uv for Python dependency and virtual environment management.
+
+To configure the local virtual environment and install all required dependencies, run:
+```
+uv sync
+```
+
+This will:
+
+- Create a local virtual environment
+
+- Install all dependencies defined in pyproject.toml
+
+- Lock exact package versions via uv.lock
 
 From the repository root:
 ```
