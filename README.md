@@ -87,12 +87,12 @@ The Chroma vector store is persisted locally to avoid rebuilding embeddings on e
 
 Coding uses a retrieval-only approach, as specified in the task
 
-Running the Application
+# Running the Application
 ## Requirements
 
-## Python 3.11+
+### Python 3.11+
 
-## OpenAI API key
+### OpenAI API key
 
 - Set the API key in your environment:
   ```
